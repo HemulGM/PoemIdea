@@ -16,10 +16,6 @@ type
   end;
   TFontItems = TTableData<TFontItem>;
 
-  TRichCust = class(TRichEdit)
-   procedure WMPaint(var Message: TWMPaint); message WM_PAINT;
-  end;
-
   TFormMain = class(TForm)
     PanelView: TPanel;
     ImageListNotes: TImageList;
@@ -45,10 +41,7 @@ type
     ColorDialog: TColorDialog;
     PanelList: TPanel;
     TableExItems: TTableEx;
-    Panel3: TPanel;
-    ButtonFlat1: TButtonFlat;
     Panel4: TPanel;
-    ButtonFlat3: TButtonFlat;
     EditDesc: TEdit;
     Shape1: TShape;
     ButtonFlatNoteBG: TButtonFlat;
@@ -68,6 +61,14 @@ type
     ButtonFlatNoteAlCenter: TButtonFlat;
     ButtonFlatNoteAlRight: TButtonFlat;
     ButtonFlatNoteAlWidth: TButtonFlat;
+    PanelCtrl: TPanel;
+    ButtonFlatNew: TButtonFlat;
+    ButtonFlatSave: TButtonFlat;
+    ImageListButtons: TImageList;
+    ButtonFlatCopy: TButtonFlat;
+    ButtonFlatExit: TButtonFlat;
+    ButtonFlatDel: TButtonFlat;
+    ButtonFlatFormat: TButtonFlat;
     procedure TableExFontsDrawCellData(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure TableExFontsItemClick(Sender: TObject; MouseButton: TMouseButton;
@@ -98,18 +99,23 @@ type
     procedure ColorGridNoteBGSelect(Sender: TObject);
     procedure ColorGridNoteFGSelect(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure ButtonFlat1Click(Sender: TObject);
-    procedure ButtonFlat3Click(Sender: TObject);
+    procedure ButtonFlatNewClick(Sender: TObject);
+    procedure ButtonFlatSaveClick(Sender: TObject);
     procedure TableExItemsChangeItem(Sender: TObject; const Old: Integer;
       var New: Integer);
     procedure TableExItemsGetData(FCol, FRow: Integer; var Value: string);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormPaint(Sender: TObject);
+    procedure ButtonFlatExitClick(Sender: TObject);
+    procedure ButtonFlatDelClick(Sender: TObject);
+    procedure ButtonFlatCopyClick(Sender: TObject);
+    procedure ButtonFlatFormatClick(Sender: TObject);
+    procedure TableExItemsItemClick(Sender: TObject; MouseButton: TMouseButton;
+      const Index: Integer);
   protected
     procedure WMSize(var Message: TWMSize); message WM_SIZE;
   private
-    RichCanvas: TControlCanvas;
     FDB:TSQLiteDatabase;
     FItems:TTextItems;
     FPopupFonts:TFormPopup;
@@ -121,14 +127,22 @@ type
     SelectionColor:TColor;
     HotOverColor:TColor;
     ForegroundColor:TColor;
+    FEmpty:Boolean;
+    FLoadID:Integer;
     procedure SetButtonCheckColor(Button: TButtonFlat; Value: Boolean);
     procedure Select(Index:Integer);
     procedure Load(Index: Integer);
     procedure Save(Index: Integer);
+    procedure Delete(Index: Integer);
     procedure SetColors;
+    procedure Clear;
+    procedure UpdateEnable;
   public
     { Public declarations }
   end;
+
+const
+  BGColor = $00620031;
 
 var
   FormMain: TFormMain;
@@ -146,7 +160,7 @@ end;
 
 procedure TFormMain.SetButtonCheckColor(Button:TButtonFlat; Value:Boolean);
 begin
- if Value then Button.ColorNormal:=BackgroundColor
+ if Value then Button.ColorNormal:=ColorDarker(SelectionColor)
  else Button.ColorNormal:=HotOverColor;
 end;
 
@@ -162,11 +176,13 @@ begin
  Load(Index);
 end;
 
-procedure TFormMain.ButtonFlat1Click(Sender: TObject);
+procedure TFormMain.ButtonFlatNewClick(Sender: TObject);
 var Item:TTextItem;
 begin
+ ButtonFlatSaveClick(nil);
  Item:=TTextItem.Create(FItems);
  FItems.Insert(0, Item);
+ FItems.Update(0);
  Select(0);
 end;
 
@@ -178,17 +194,17 @@ begin
    MemoNote.PlainText:=False;
    FItems[Index].Text.Position:=0;
    MemoNote.Lines.LoadFromStream(FItems[Index].Text);
+   FEmpty:=False;
+   FLoadID:=FItems[Index].ID;
+   TableExItems.ItemIndex:=Index;
   end
- else
-  begin
-   EditDesc.Clear;
-   MemoNote.PlainText:=False;
-   MemoNote.Clear;
-  end;
+ else Clear;
+ UpdateEnable;
 end;
 
 procedure TFormMain.Save(Index:Integer);
 begin
+ if FEmpty then Exit;
  if IndexInList(Index, FItems.Count) then
   begin
    FItems[Index].Text.Position:=0;
@@ -199,6 +215,7 @@ begin
     end;
    FItems[Index].Desc:=EditDesc.Text;
    FItems.Update(Index);
+   FItems.UpdateTable;
   end;
 end;
 
@@ -208,9 +225,24 @@ begin
  MemoNoteSelectionChange(nil);
 end;
 
-procedure TFormMain.ButtonFlat3Click(Sender: TObject);
+procedure TFormMain.ButtonFlatSaveClick(Sender: TObject);
 begin
  Save(TableExItems.ItemIndex);
+end;
+
+procedure TFormMain.ButtonFlatCopyClick(Sender: TObject);
+begin
+ //
+end;
+
+procedure TFormMain.ButtonFlatDelClick(Sender: TObject);
+var DL:Integer;
+begin
+ DL:=TableExItems.ItemIndex;
+ Delete(DL);
+ Clear;
+ TableExItems.ItemIndex:=DL-1;
+ Load(DL-1);
 end;
 
 procedure TFormMain.ButtonFlatDropDownFontsClick(Sender: TObject);
@@ -219,6 +251,18 @@ begin
  pt:=ButtonFlatFonts.ClientToScreen(Point(0, 0));
  TableExFonts.Height:=Min(400, TableExFonts.ItemCount*TableExFonts.DefaultRowHeight+2);
  FPopupFonts:=TFormPopup.Create(Self, TableExFonts, pt.X, pt.Y+ButtonFlatFonts.Height);
+end;
+
+procedure TFormMain.ButtonFlatExitClick(Sender: TObject);
+begin
+ ButtonFlatSaveClick(nil);
+ Application.Terminate;
+end;
+
+procedure TFormMain.ButtonFlatFormatClick(Sender: TObject);
+begin
+ PanelNoteFormat.Visible:=not PanelNoteFormat.Visible;
+ ButtonFlatSaveClick(nil);
 end;
 
 procedure TFormMain.ButtonFlatNoteAlCenterClick(Sender: TObject);
@@ -400,6 +444,14 @@ begin
  MemoNoteSelectionChange(nil);
 end;
 
+procedure TFormMain.Clear;
+begin
+ EditDesc.Clear;
+ MemoNote.PlainText:=False;
+ MemoNote.Clear;
+ FEmpty:=True;
+end;
+
 procedure TFormMain.ColorGridNoteBGSelect(Sender: TObject);
 begin
  if Assigned(FPopupColor) then FPopupColor.Close;
@@ -427,6 +479,16 @@ begin
   end;
 end;
 
+procedure TFormMain.Delete(Index: Integer);
+begin
+ if IndexInList(Index, FItems.Count) then
+  begin
+   FItems.Delete(Index);
+   FItems.UpdateTable;
+  end;
+ UpdateEnable;
+end;
+
 procedure TFormMain.SetColors;
 
 procedure SetStyle(Control:TWinControl);
@@ -451,7 +513,7 @@ begin
     begin
      (Control.Controls[i] as TButtonFlat).ColorNormal:=HotOverColor;
      (Control.Controls[i] as TButtonFlat).ColorOver:=SelectionColor;
-     (Control.Controls[i] as TButtonFlat).ColorPressed:=BackgroundColor;
+     (Control.Controls[i] as TButtonFlat).ColorPressed:=ColorDarker(SelectionColor);
      (Control.Controls[i] as TButtonFlat).BorderColor:=ColorDarker(BackgroundColor);
 
      (Control.Controls[i] as TButtonFlat).Font.Color:=$00383838;
@@ -485,33 +547,13 @@ begin
   ColorImages(ImageListNotes, i, ForegroundColor);
 
  SetStyle(PanelView);
+ SetStyle(PanelNoteFormat);
+ PanelCtrl.Color:=BGColor;
 end;
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
-
- MemoNote.Free;
- MemoNote:=TRichCust.Create(Self);
- MemoNote.Name:= 'MemoNote';
- MemoNote.Parent:=PanelView;
- MemoNote.Align:=alClient;
- MemoNote.Left := 0;
- MemoNote.Top := 71;
- MemoNote.Width := 669;
- MemoNote.Height := 365;
- MemoNote.Align := alClient;
- MemoNote.BorderStyle := bsNone;
- MemoNote.Color := 3223857;
- MemoNote.HideSelection := False;
- MemoNote.HideScrollBars := False;
- MemoNote.ParentFont := False;
- MemoNote.ScrollBars := ssVertical;
- MemoNote.TabOrder := 0;
- MemoNote.Zoom := 100;
- MemoNote.OnSelectionChange := MemoNoteSelectionChange;
-
- RichCanvas:=TControlCanvas.Create;
- RichCanvas.Control:=MemoNote;
+ FLoadID:=-1;
  FDB:=TSQLiteDatabase.Create(ExtractFilePath(Application.ExeName)+'data.db');
  FItems:=TTextItems.Create(FDB, TableExItems);
  FItems.Reload;
@@ -538,6 +580,8 @@ begin
  FFontItems.Add(TFontItem.Create('Trebuchet MS'));
  FFontItems.Add(TFontItem.Create('Verdana'));
  FFontItems.UpdateTable;
+
+ Clear;
 end;
 
 procedure TFormMain.FormMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -549,26 +593,81 @@ end;
 
 procedure TFormMain.FormPaint(Sender: TObject);
 var Rct:TRect;
+    i, L:Integer;
 begin
- Rct:=ClientRect;
- Rct.Inflate(-Padding.Left, -Padding.Top);
  with Canvas do
   begin
+   //Вся рамка
    Brush.Style:=bsSolid;
-   Pen.Style:=psClear;
-   Brush.Color:=$00620031;
-   FillRect(ClientRect);
-   Brush.Color:=BackgroundColor;
+   Pen.Width:=1;
+   Pen.Style:=psSolid;
+   Brush.Color:=BGColor;
+   Pen.Color:=ColorDarker(Brush.Color, 50);
+   Rct:=ClientRect;
+   Rct.Width:=Rct.Width - 1;
+   Rct.Height:=Rct.Height - 1;
    RoundRect(Rct, 20, 20);
 
-
-   Rct:=Rect(PanelList.Left+PanelList.Width+20, 0, PanelView.Left-20, ClientHeight);
-   Brush.Color:=$00620031;
+   //Белое полотно
+   Rct:=ClientRect;
+   Rct.Inflate(-Padding.Left, -Padding.Top);
+   Rct.Height:=Rct.Height + 1;
+   Pen.Style:=psClear;
+   Brush.Color:=BackgroundColor;
    FillRect(Rct);
 
-   Rct:=Rect(PanelList.Left+PanelList.Width+27, 0, PanelView.Left-27, ClientHeight);
+   //Часть рамки
+   Rct.Left:=ClientRect.Width div 2 - 10 div 2;
+   Rct.Top:=0;
+   Rct.Width := 10;
+   Rct.Height := ClientHeight;
+   Brush.Color:=BGColor;
+   FillRect(Rct);
+
+   //Щель
+   Rct.Left:=ClientRect.Width div 2 - 2 div 2;
+   Rct.Top:=0;
+   Rct.Width := 2;
+   Rct.Height := ClientHeight;
    Brush.Color:=TransparentColorValue;
    FillRect(Rct);
+
+   L:=Rct.Left;
+   for i:= 0 to (ClientHeight - 20) div 50-1 do
+    begin
+     Pen.Width:=1;
+     Pen.Style:=psSolid;
+     Brush.Color:=ColorDarker(clWhite);
+     Pen.Color:=Brush.Color;
+
+     Rct.Left:=L - 20;
+     Rct.Top:=i * 50 + 32;
+     Rct.Width:=15;
+     Rct.Height:=15;
+     Rct.Inflate(1, 1);
+     Ellipse(Rct);
+
+     Rct.Offset(28, 0);
+     Ellipse(Rct);
+     //
+     //
+     Brush.Color:=TransparentColorValue;
+
+     Rct.Left:=L - 20;
+     Rct.Top:=i * 50 + 32;
+     Rct.Width:=15;
+     Rct.Height:=15;
+     Ellipse(Rct);
+
+     Rct.Offset(28, 0);
+     Ellipse(Rct);
+
+     Pen.Color:=$00D2D2D2;
+     Pen.Style:=psSolid;
+     Pen.Width:=7;
+     MoveTo(L - 13, Rct.Top + 7);
+     LineTo(L + 15, Rct.Top + 7);
+    end;
   end;
 end;
 
@@ -629,10 +728,16 @@ begin
   end;
 end;
 
+procedure TFormMain.UpdateEnable;
+begin
+ PanelView.Enabled:=not FEmpty;
+end;
+
 procedure TFormMain.TableExItemsChangeItem(Sender: TObject; const Old: Integer; var New: Integer);
 begin
  Save(Old);
  Load(New);
+ UpdateEnable;
 end;
 
 procedure TFormMain.TableExItemsGetData(FCol, FRow: Integer; var Value: string);
@@ -640,7 +745,17 @@ begin
  if IndexInList(FRow, FItems.Count) then
   begin
    Value:=FItems[FRow].Desc;
-  end;
+   if Value = '' then Value:='Безыменный';
+   
+  end
+ else
+  Value:='Нажми, чтобы добавить';
+end;
+
+procedure TFormMain.TableExItemsItemClick(Sender: TObject;
+  MouseButton: TMouseButton; const Index: Integer);
+begin
+ if FItems.Count = 0 then ButtonFlatNewClick(nil);
 end;
 
 procedure TFormMain.WMSize(var Message: TWMSize);
@@ -650,43 +765,6 @@ begin
  RGN:=CreateRoundRectRgn(Left, Top, Left+ClientWidth, Top+ClientHeight, 20, 20);
  SetWindowRgn(Handle, RGN, True);
  Repaint;
-end;
-{
-procedure WMNCHitTest(var message: TWMNCHitTest);message WM_NCHITTEST;
-procedure TFormMain.WMNCHitTest(var message: TWMNCHitTest);
-const EDGEDETECT = 7;
-      EDGEDETECT2 = 12;
-var deltaRect:TRect;
-begin
- inherited;
- if BorderStyle = bsNone then
-  with Message, deltaRect do
-   begin
-    Left:=XPos - BoundsRect.Left;
-    Right:=BoundsRect.Right - XPos;
-    Top:=YPos - BoundsRect.Top;
-    Bottom:=BoundsRect.Bottom - YPos;
-    if (Top < EDGEDETECT2) and (Left < EDGEDETECT2) then Result:=HTTOPLEFT else
-    if (Top < EDGEDETECT2) and (Right < EDGEDETECT2) then Result:=HTTOPRIGHT else
-    if (Bottom < EDGEDETECT2) and (Left < EDGEDETECT2) then Result:=HTBOTTOMLEFT else
-    if (Bottom < EDGEDETECT2) and (Right < EDGEDETECT2) then Result:=HTBOTTOMRIGHT else
-    if (Top < EDGEDETECT) then Result:=HTTOP else
-    if (Left < EDGEDETECT) then Result:=HTLEFT else
-    if (Bottom < EDGEDETECT) then Result:=HTBOTTOM else
-    if (Right < EDGEDETECT) then Result:=HTRIGHT;
-   end;
-end;
-}
-
-{ TRichCust }
-
-procedure TRichCust.WMPaint(var Message: TWMPaint);
-begin
- inherited;
- with FormMain.RichCanvas do
-  begin
-   //Rectangle(0, 0, 50, 50);
-  end;
 end;
 
 end.
