@@ -18,6 +18,7 @@ object FormMain: TFormMain
   Padding.Right = 24
   Padding.Bottom = 24
   OldCreateOrder = False
+  Position = poScreenCenter
   Scaled = False
   ShowHint = True
   OnCreate = FormCreate
@@ -39,8 +40,6 @@ object FormMain: TFormMain
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 0
-    ExplicitLeft = 534
-    ExplicitWidth = 410
     object Shape1: TShape
       AlignWithMargins = True
       Left = 0
@@ -76,7 +75,6 @@ object FormMain: TFormMain
       TabOrder = 0
       Zoom = 100
       OnSelectionChange = MemoNoteSelectionChange
-      ExplicitWidth = 410
     end
     object PanelNoteFormat: TPanel
       Left = 0
@@ -90,7 +88,6 @@ object FormMain: TFormMain
       TabOrder = 1
       Visible = False
       StyleElements = []
-      ExplicitWidth = 410
       object Panel21: TPanel
         Left = 0
         Top = 0
@@ -102,7 +99,6 @@ object FormMain: TFormMain
         ParentBackground = False
         TabOrder = 0
         StyleElements = []
-        ExplicitWidth = 410
         object ButtonFlatDropDownFonts: TButtonFlat
           AlignWithMargins = True
           Left = 157
@@ -542,7 +538,6 @@ object FormMain: TFormMain
         ParentBackground = False
         TabOrder = 1
         StyleElements = []
-        ExplicitWidth = 410
         object ButtonFlatNoteParLeft: TButtonFlat
           Tag = 1
           AlignWithMargins = True
@@ -1401,7 +1396,6 @@ object FormMain: TFormMain
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 5
-      ExplicitWidth = 410
       object EditDesc: TEdit
         AlignWithMargins = True
         Left = 3
@@ -1423,7 +1417,6 @@ object FormMain: TFormMain
         ParentFont = False
         TabOrder = 0
         TextHint = #1053#1072#1079#1074#1072#1085#1080#1077
-        ExplicitWidth = 404
       end
     end
   end
@@ -1582,7 +1575,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 18
     end
     object ButtonFlatCopy: TButtonFlat
       Left = 0
@@ -1625,7 +1617,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 32
     end
     object ButtonFlatExit: TButtonFlat
       Left = 0
@@ -1668,8 +1659,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitLeft = -6
-      ExplicitTop = 152
     end
     object ButtonFlatDel: TButtonFlat
       Left = 0
@@ -1712,7 +1701,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 32
     end
     object ButtonFlatFormat: TButtonFlat
       Left = 0
@@ -1755,7 +1743,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 18
     end
   end
   object ImageListNotes: TImageList
@@ -1763,7 +1750,7 @@ object FormMain: TFormMain
     Left = 256
     Top = 152
     Bitmap = {
-      494C010128008800600010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010128008800640010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000B0000000010020000000000000B0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3255,7 +3242,7 @@ object FormMain: TFormMain
     Left = 160
     Top = 152
     Bitmap = {
-      494C010106001000140018001800FFFFFFFF2100FFFFFFFFFFFFFFFF424D3600
+      494C010106001000180018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3853,6 +3840,7 @@ object FormMain: TFormMain
       E7E7F067E324C7E08047E3E7C7E3F847E1E787E00187E1FF87E1F887F0FF0FF0
       010FF0FF0FF0FF0FF87E1FF87E1FF87E1FF87E1FFC003FFC003FFC003FFC003F
       FE007FFE007FFE007FFE007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
 end
