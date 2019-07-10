@@ -85,6 +85,12 @@ type
     ButtonFlatOkChange: TButtonFlat;
     PanelNoteFlags: TPanel;
     CheckBoxCompleted: TCheckBoxFlat;
+    ButtonFlatLockQuit: TButtonFlat;
+    ButtonFlatLogin: TButtonFlat;
+    DrawPanelFakeLists1: TDrawPanel;
+    DrawPanelFakeLists2: TDrawPanel;
+    PanelEditor: TPanel;
+    ImageListCheck: TImageList;
     procedure TableExFontsDrawCellData(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure TableExFontsItemClick(Sender: TObject; MouseButton: TMouseButton; const Index: Integer);
     procedure MemoNoteSelectionChange(Sender: TObject);
@@ -136,6 +142,9 @@ type
     procedure CheckBoxCompletedClick(Sender: TObject);
     procedure TableExItemsDrawCellData(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure FormShow(Sender: TObject);
+    procedure ButtonFlatLoginClick(Sender: TObject);
+    procedure DrawPanelFakeLists1Paint(Sender: TObject);
   protected
     procedure WMSize(var Message: TWMSize); message WM_SIZE;
   private
@@ -249,6 +258,13 @@ begin
   begin
     EditPass.Text := '';
     PanelCtrl.Show;
+    while PanelLock.Top > -PanelLock.Height do
+    begin
+      PanelLock.Top := PanelLock.Top - 10;
+      Sleep(2);
+      Repaint;
+    end;
+
     PanelLock.Hide;
     Repaint;
   end;
@@ -280,6 +296,11 @@ end;
 procedure TFormMain.ButtonFlatSaveClick(Sender: TObject);
 begin
   Save(TableExItems.ItemIndex);
+end;
+
+procedure TFormMain.ButtonFlatLoginClick(Sender: TObject);
+begin
+  Login;
 end;
 
 procedure TFormMain.ButtonFlatCancelChangeClick(Sender: TObject);
@@ -320,7 +341,7 @@ var
 begin
   pt := ButtonFlatFonts.ClientToScreen(Point(0, 0));
   TableExFonts.Height := Min(400, TableExFonts.ItemCount * TableExFonts.DefaultRowHeight + 2);
-  FPopupFonts := TFormPopup.CreatePopup(Self, TableExFonts, nil, pt.X, pt.Y + ButtonFlatFonts.Height, [psAnimate, psShadow]);
+  FPopupFonts := TFormPopup.CreatePopup(Self, TableExFonts, nil, pt.X, pt.Y + ButtonFlatFonts.Height, [psAnimate, psShadow, psFrame]);
 end;
 
 procedure TFormMain.ButtonFlatExitClick(Sender: TObject);
@@ -407,7 +428,7 @@ var
 begin
   pt := ButtonFlatNoteBG.ClientToScreen(Point(0, 0));
   ColorGridNoteBG.SelectedColor := RichEditGetBGCOlor(MemoNote, clNone);
-  FPopupColor := TFormPopup.CreatePopup(Self, PanelNoteBGColor, nil, pt.X, pt.Y + ButtonFlatNoteBG.Height, [psAnimate, psShadow]);
+  FPopupColor := TFormPopup.CreatePopup(Self, PanelNoteBGColor, nil, pt.X, pt.Y + ButtonFlatNoteBG.Height, [psAnimate, psShadow, psFrame]);
 end;
 
 procedure TFormMain.ButtonFlatNoteBGNoColorClick(Sender: TObject);
@@ -459,7 +480,7 @@ var
 begin
   pt := ButtonFlatNoteFG.ClientToScreen(Point(0, 0));
   ColorGridNoteFG.SelectedColor := MemoNote.SelAttributes.Color;
-  FPopupColor := TFormPopup.CreatePopup(Self, PanelNoteFGColor, nil, pt.X, pt.Y + ButtonFlatNoteFG.Height, [psAnimate, psShadow]);
+  FPopupColor := TFormPopup.CreatePopup(Self, PanelNoteFGColor, nil, pt.X, pt.Y + ButtonFlatNoteFG.Height, [psAnimate, psShadow, psFrame]);
 end;
 
 procedure TFormMain.ButtonFlatNoteItalicClick(Sender: TObject);
@@ -634,6 +655,24 @@ begin
   UpdateEnable;
 end;
 
+procedure TFormMain.DrawPanelFakeLists1Paint(Sender: TObject);
+var i: Integer;
+begin
+  with (Sender as TDrawPanel).Canvas do
+  begin
+    Pen.Width := 2;
+    for i := 0 to (Sender as TDrawPanel).Width div Pen.Width do
+    begin
+      if i mod 2 = 0 then
+        Pen.Color := $00D0D0D0
+      else
+        Pen.Color := $00BCBCBC;
+      MoveTo(i * Pen.Width, 0);
+      LineTo(i * Pen.Width, (Sender as TDrawPanel).Height);
+    end;
+  end;
+end;
+
 procedure TFormMain.EditPassKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
@@ -712,8 +751,9 @@ begin
   for i := 0 to ImageListNotes.Count - 1 do
     ColorImages(ImageListNotes, i, ForegroundColor);
 
-  SetStyle(PanelView);
   SetStyle(PanelNoteFormat);
+  SetStyle(PanelNoteBGColor);
+  SetStyle(PanelNoteFGColor);
   PanelCtrl.Color := BGColor;
 end;
 
@@ -794,13 +834,14 @@ begin
    //Белое полотно
     Rct := ClientRect;
     Rct.Inflate(-Padding.Left, -Padding.Top);
-    Rct.Height := Rct.Height + 1;
+    Pen.Width := 0;
     Pen.Style := psClear;
     Brush.Color := BackgroundColor;
     FillRect(Rct);
 
 
-    if (not PanelLock.Visible) and (not PanelChangePass.Visible) then
+    Pen.Width := 2;
+    if ((not PanelLock.Visible) or (PanelLock.Top < 0)) and (not PanelChangePass.Visible) then
     begin
 
       //Часть рамки
@@ -859,6 +900,11 @@ begin
     end;
     Draw(Image1.Left, Image1.Top, Image1.Picture.Graphic);
   end;
+end;
+
+procedure TFormMain.FormShow(Sender: TObject);
+begin
+  EditPass.SetFocus;
 end;
 
 procedure TFormMain.MemoNoteSelectionChange(Sender: TObject);
