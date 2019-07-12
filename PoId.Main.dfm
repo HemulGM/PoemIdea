@@ -1,6 +1,7 @@
 object FormMain: TFormMain
   Left = 0
   Top = 0
+  AlphaBlend = True
   BorderStyle = bsNone
   ClientHeight = 576
   ClientWidth = 968
@@ -11,7 +12,7 @@ object FormMain: TFormMain
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWhite
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   Padding.Left = 24
   Padding.Top = 24
@@ -8323,12 +8324,51 @@ object FormMain: TFormMain
     Color = 12419407
     ParentBackground = False
     TabOrder = 4
+    object Label3: TLabel
+      Left = 280
+      Top = 227
+      Width = 51
+      Height = 17
+      Caption = #1058#1077#1082#1091#1097#1080#1081
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 14599857
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 280
+      Top = 276
+      Width = 40
+      Height = 17
+      Caption = #1053#1086#1074#1099#1081
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 14599857
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 280
+      Top = 325
+      Width = 64
+      Height = 17
+      Caption = #1055#1086#1074#1090#1086#1088#1080#1090#1100
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 14599857
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
     object Label2: TLabel
       AlignWithMargins = True
       Left = 3
       Top = 30
       Width = 914
-      Height = 54
+      Height = 117
       Margins.Top = 30
       Align = alTop
       Alignment = taCenter
@@ -8336,35 +8376,13 @@ object FormMain: TFormMain
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -40
-      Font.Name = 'Segoe UI Light'
+      Font.Name = 'Scriptorama'
       Font.Style = []
       Font.Quality = fqAntialiased
       ParentFont = False
-      ExplicitWidth = 248
-    end
-    object Label3: TLabel
-      Left = 288
-      Top = 227
-      Width = 45
-      Height = 13
-      Caption = #1058#1077#1082#1091#1097#1080#1081
-    end
-    object Label4: TLabel
-      Left = 288
-      Top = 276
-      Width = 33
-      Height = 13
-      Caption = #1053#1086#1074#1099#1081
-    end
-    object Label5: TLabel
-      Left = 288
-      Top = 325
-      Width = 55
-      Height = 13
-      Caption = #1055#1086#1074#1090#1086#1088#1080#1090#1100
     end
     object EditChCurrentPass: TEdit
-      Left = 367
+      Left = 359
       Top = 212
       Width = 195
       Height = 44
@@ -8386,7 +8404,7 @@ object FormMain: TFormMain
       OnKeyPress = EditPassKeyPress
     end
     object EditChNewPass: TEdit
-      Left = 367
+      Left = 359
       Top = 262
       Width = 195
       Height = 44
@@ -8408,7 +8426,7 @@ object FormMain: TFormMain
       OnKeyPress = EditPassKeyPress
     end
     object EditChRepPass: TEdit
-      Left = 367
+      Left = 359
       Top = 312
       Width = 195
       Height = 44
@@ -8430,7 +8448,7 @@ object FormMain: TFormMain
       OnKeyPress = EditPassKeyPress
     end
     object ButtonFlatCancelChange: TButtonFlat
-      Left = 465
+      Left = 457
       Top = 382
       Width = 97
       Height = 30
@@ -8469,7 +8487,7 @@ object FormMain: TFormMain
       SubTextFont.Style = []
     end
     object ButtonFlatOkChange: TButtonFlat
-      Left = 367
+      Left = 359
       Top = 382
       Width = 97
       Height = 30
@@ -8499,131 +8517,6 @@ object FormMain: TFormMain
       Shape = stRoundRect
       ShowFocusRect = False
       TabOrder = 4
-      TabStop = True
-      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clWhite
-      SubTextFont.Height = -13
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-    end
-  end
-  object PanelLock: TPanel
-    Left = 24
-    Top = 24
-    Width = 920
-    Height = 529
-    BevelOuter = bvNone
-    Color = 12419407
-    ParentBackground = False
-    TabOrder = 3
-    OnMouseDown = FormMouseDown
-    object Label1: TLabel
-      Left = 346
-      Top = -16
-      Width = 192
-      Height = 117
-      Caption = #1053#1077' '#1076#1083#1103' '#1074#1089#1077#1093'!'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -40
-      Font.Name = 'Scriptorama'
-      Font.Style = []
-      Font.Quality = fqAntialiased
-      ParentFont = False
-    end
-    object EditPass: TEdit
-      Left = 346
-      Top = 238
-      Width = 195
-      Height = 44
-      Alignment = taCenter
-      BevelInner = bvSpace
-      BevelKind = bkSoft
-      BevelOuter = bvNone
-      BevelWidth = 3
-      BorderStyle = bsNone
-      Color = 8936762
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -27
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      PasswordChar = '*'
-      TabOrder = 0
-      OnKeyPress = EditPassKeyPress
-    end
-    object ButtonFlatLockQuit: TButtonFlat
-      Left = 444
-      Top = 288
-      Width = 97
-      Height = 30
-      Caption = #1042#1099#1081#1090#1080
-      ColorNormal = 12023876
-      ColorOver = 8936762
-      ColorPressed = 12023876
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      FontOver.Charset = DEFAULT_CHARSET
-      FontOver.Color = clWhite
-      FontOver.Height = -13
-      FontOver.Name = 'Tahoma'
-      FontOver.Style = []
-      FontDown.Charset = DEFAULT_CHARSET
-      FontDown.Color = clWhite
-      FontDown.Height = -13
-      FontDown.Name = 'Tahoma'
-      FontDown.Style = []
-      GroupItemKind = giRight
-      IgnorBounds = True
-      OnClick = ButtonFlatExitClick
-      RoundRectParam = 30
-      Shape = stRoundRect
-      ShowFocusRect = False
-      TabOrder = 1
-      TabStop = True
-      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
-      SubTextFont.Charset = DEFAULT_CHARSET
-      SubTextFont.Color = clWhite
-      SubTextFont.Height = -13
-      SubTextFont.Name = 'Tahoma'
-      SubTextFont.Style = []
-    end
-    object ButtonFlatLogin: TButtonFlat
-      Left = 346
-      Top = 288
-      Width = 97
-      Height = 30
-      Caption = #1054#1082
-      ColorNormal = 12023876
-      ColorOver = 8936762
-      ColorPressed = 12023876
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      FontOver.Charset = DEFAULT_CHARSET
-      FontOver.Color = clWhite
-      FontOver.Height = -13
-      FontOver.Name = 'Tahoma'
-      FontOver.Style = []
-      FontDown.Charset = DEFAULT_CHARSET
-      FontDown.Color = clWhite
-      FontDown.Height = -13
-      FontDown.Name = 'Tahoma'
-      FontDown.Style = []
-      GroupItemKind = giLeft
-      IgnorBounds = True
-      OnClick = ButtonFlatLoginClick
-      RoundRectParam = 30
-      Shape = stRoundRect
-      ShowFocusRect = False
-      TabOrder = 2
       TabStop = True
       TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
       SubTextFont.Charset = DEFAULT_CHARSET
@@ -8731,7 +8624,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 481
     end
     object ButtonFlatCopy: TButtonFlat
       Left = 0
@@ -8816,7 +8708,6 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 505
     end
     object ButtonFlatDel: TButtonFlat
       Left = 0
@@ -8943,7 +8834,216 @@ object FormMain: TFormMain
       SubTextFont.Height = -13
       SubTextFont.Name = 'Tahoma'
       SubTextFont.Style = []
-      ExplicitTop = 457
+    end
+  end
+  object PanelLock: TPanel
+    Left = 24
+    Top = 24
+    Width = 920
+    Height = 529
+    BevelOuter = bvNone
+    Color = 12419407
+    ParentBackground = False
+    TabOrder = 3
+    OnMouseDown = FormMouseDown
+    object Label1: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 30
+      Width = 914
+      Height = 117
+      Margins.Top = 30
+      Align = alTop
+      Alignment = taCenter
+      Caption = #1053#1077' '#1076#1083#1103' '#1074#1089#1077#1093'!'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -40
+      Font.Name = 'Scriptorama'
+      Font.Style = []
+      Font.Quality = fqAntialiased
+      ParentFont = False
+      ExplicitLeft = 346
+      ExplicitTop = -16
+      ExplicitWidth = 192
+    end
+    object EditPass: TEdit
+      Left = 359
+      Top = 262
+      Width = 195
+      Height = 44
+      Alignment = taCenter
+      BevelInner = bvSpace
+      BevelKind = bkSoft
+      BevelOuter = bvNone
+      BevelWidth = 3
+      BorderStyle = bsNone
+      Color = 8936762
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -27
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      PasswordChar = '*'
+      TabOrder = 0
+      OnKeyPress = EditPassKeyPress
+    end
+    object ButtonFlatLockQuit: TButtonFlat
+      Left = 457
+      Top = 382
+      Width = 97
+      Height = 30
+      Caption = #1042#1099#1081#1090#1080
+      ColorNormal = 12023876
+      ColorOver = 8936762
+      ColorPressed = 12023876
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWhite
+      FontOver.Height = -13
+      FontOver.Name = 'Tahoma'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWhite
+      FontDown.Height = -13
+      FontDown.Name = 'Tahoma'
+      FontDown.Style = []
+      GroupItemKind = giRight
+      IgnorBounds = True
+      OnClick = ButtonFlatLockQuitClick
+      RoundRectParam = 30
+      Shape = stRoundRect
+      ShowFocusRect = False
+      TabOrder = 1
+      TabStop = True
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+    end
+    object ButtonFlatLogin: TButtonFlat
+      Left = 359
+      Top = 382
+      Width = 97
+      Height = 30
+      Caption = #1054#1082
+      ColorNormal = 12023876
+      ColorOver = 8936762
+      ColorPressed = 12023876
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      FontOver.Charset = DEFAULT_CHARSET
+      FontOver.Color = clWhite
+      FontOver.Height = -13
+      FontOver.Name = 'Tahoma'
+      FontOver.Style = []
+      FontDown.Charset = DEFAULT_CHARSET
+      FontDown.Color = clWhite
+      FontDown.Height = -13
+      FontDown.Name = 'Tahoma'
+      FontDown.Style = []
+      GroupItemKind = giLeft
+      IgnorBounds = True
+      OnClick = ButtonFlatLoginClick
+      RoundRectParam = 30
+      Shape = stRoundRect
+      ShowFocusRect = False
+      TabOrder = 2
+      TabStop = True
+      TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+      SubTextFont.Charset = DEFAULT_CHARSET
+      SubTextFont.Color = clWhite
+      SubTextFont.Height = -13
+      SubTextFont.Name = 'Tahoma'
+      SubTextFont.Style = []
+    end
+  end
+  object PanelList: TPanel
+    AlignWithMargins = True
+    Left = 24
+    Top = 24
+    Width = 435
+    Height = 528
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 20
+    Margins.Bottom = 0
+    Align = alLeft
+    BevelOuter = bvNone
+    TabOrder = 1
+    object TableExItems: TTableEx
+      Left = 9
+      Top = 0
+      Width = 426
+      Height = 528
+      Align = alClient
+      BorderStyle = bsNone
+      DefaultRowHeight = 30
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnDrawCellData = TableExItemsDrawCellData
+      ItemIndex = -1
+      OnChangeItem = TableExItemsChangeItem
+      OnItemClick = TableExItemsItemClick
+      GetData = TableExItemsGetData
+      OnEdit = TableExItemsEdit
+      OnEditOk = TableExItemsEditOk
+      ProcEmpty = True
+      Columns = <
+        item
+          Width = 426
+        end>
+      CanNoSelect = False
+      VisibleEdit = False
+      ItemCount = 1
+      FontHotLine.Charset = DEFAULT_CHARSET
+      FontHotLine.Color = 2631720
+      FontHotLine.Height = -16
+      FontHotLine.Name = 'Tahoma'
+      FontHotLine.Style = []
+      FontLine.Charset = DEFAULT_CHARSET
+      FontLine.Color = 2631720
+      FontLine.Height = -16
+      FontLine.Name = 'Tahoma'
+      FontLine.Style = []
+      FontSelLine.Charset = DEFAULT_CHARSET
+      FontSelLine.Color = clWhite
+      FontSelLine.Height = -16
+      FontSelLine.Name = 'Tahoma'
+      FontSelLine.Style = []
+      ShowColumns = False
+      ColumnsFont.Charset = DEFAULT_CHARSET
+      ColumnsFont.Color = 2631720
+      ColumnsFont.Height = -11
+      ColumnsFont.Name = 'Tahoma'
+      ColumnsFont.Style = []
+    end
+    object DrawPanelFakeLists1: TDrawPanel
+      Left = 0
+      Top = 0
+      Width = 9
+      Height = 528
+      Caption = 'DrawPanelFakeLists1'
+      DefaultPaint = False
+      OnPaint = DrawPanelFakeLists1Paint
+      Align = alLeft
+      ParentBackground = False
+      TabOrder = 1
     end
   end
   object PanelView: TPanel
@@ -8971,9 +9071,6 @@ object FormMain: TFormMain
       Align = alRight
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 24
-      ExplicitTop = 176
-      ExplicitHeight = 130
     end
     object PanelEditor: TPanel
       Left = 0
@@ -8985,10 +9082,6 @@ object FormMain: TFormMain
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 128
-      ExplicitTop = 248
-      ExplicitWidth = 185
-      ExplicitHeight = 41
       object MemoNote: TRichEdit
         Left = 0
         Top = 56
@@ -9012,8 +9105,8 @@ object FormMain: TFormMain
         OnSelectionChange = MemoNoteSelectionChange
       end
       object PanelNoteBGColor: TPanel
-        Left = 290
-        Top = 166
+        Left = 277
+        Top = 62
         Width = 136
         Height = 132
         BevelOuter = bvNone
@@ -9096,8 +9189,8 @@ object FormMain: TFormMain
         end
       end
       object PanelNoteFGColor: TPanel
-        Left = 190
-        Top = 135
+        Left = 171
+        Top = 62
         Width = 100
         Height = 163
         BevelOuter = bvNone
@@ -9231,12 +9324,12 @@ object FormMain: TFormMain
         Color = clWhite
         TabOrder = 3
         Visible = False
-        ExplicitWidth = 435
         object CheckBoxCompleted: TCheckBoxFlat
-          Left = 0
+          Left = 20
           Top = 0
           Width = 105
           Height = 31
+          Hint = #1054#1090#1084#1077#1090#1082#1072' '#1086' '#1079#1072#1074#1077#1088#1096#1077#1085#1085#1086#1089#1090#1080
           Caption = #1047#1072#1074#1077#1088#1096#1077#1085#1086
           ColorNormal = clWhite
           ColorOver = 11373924
@@ -9285,15 +9378,15 @@ object FormMain: TFormMain
         Align = alTop
         BevelOuter = bvNone
         Color = 3684408
+        Padding.Left = 45
         ParentBackground = False
         TabOrder = 4
         Visible = False
         StyleElements = []
-        ExplicitWidth = 435
         object Panel21: TPanel
-          Left = 0
+          Left = 45
           Top = 0
-          Width = 426
+          Width = 381
           Height = 28
           Align = alTop
           BevelOuter = bvNone
@@ -9301,7 +9394,8 @@ object FormMain: TFormMain
           ParentBackground = False
           TabOrder = 0
           StyleElements = []
-          ExplicitWidth = 435
+          ExplicitLeft = 50
+          ExplicitWidth = 376
           object ButtonFlatDropDownFonts: TButtonFlat
             AlignWithMargins = True
             Left = 157
@@ -9355,6 +9449,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 154
             Height = 22
+            Hint = #1064#1088#1080#1092#1090
             Margins.Right = 0
             Align = alLeft
             Caption = 'Arial'
@@ -9399,6 +9494,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 44
             Height = 22
+            Hint = #1056#1072#1079#1084#1077#1088' '#1096#1088#1080#1092#1090#1072
             Margins.Right = 0
             Align = alLeft
             Caption = '8'
@@ -9545,6 +9641,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 21
             Height = 22
+            Hint = #1062#1074#1077#1090' '#1074#1099#1076#1077#1083#1077#1085#1080#1103' '#1090#1077#1082#1089#1090#1072
             Margins.Right = 0
             Align = alLeft
             Caption = ''
@@ -9640,6 +9737,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 21
             Height = 22
+            Hint = #1062#1074#1077#1090' '#1090#1077#1082#1089#1090#1072
             Margins.Left = 0
             Margins.Right = 0
             Align = alLeft
@@ -9729,11 +9827,60 @@ object FormMain: TFormMain
             SubTextFont.Name = 'Tahoma'
             SubTextFont.Style = []
           end
+          object ButtonFlatCloseFormat: TButtonFlat
+            Tag = 4
+            AlignWithMargins = True
+            Left = 353
+            Top = 3
+            Width = 25
+            Height = 22
+            Hint = #1057#1082#1088#1099#1090#1100' '#1087#1072#1085#1077#1083#1100' '#1092#1086#1088#1084#1072#1090#1080#1088#1086#1074#1072#1085#1080#1103
+            Margins.Left = 0
+            Align = alRight
+            Caption = ''
+            ColorNormal = 3684408
+            ColorOver = 6381921
+            ColorPressed = 3815994
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            BorderColor = 3026478
+            FontOver.Charset = DEFAULT_CHARSET
+            FontOver.Color = clWhite
+            FontOver.Height = -13
+            FontOver.Name = 'Tahoma'
+            FontOver.Style = []
+            FontDown.Charset = DEFAULT_CHARSET
+            FontDown.Color = clWhite
+            FontDown.Height = -13
+            FontDown.Name = 'Tahoma'
+            FontDown.Style = []
+            IgnorBounds = True
+            ImageIndentLeft = 4
+            ImageIndex = 43
+            Images = ImageListNotes
+            OnClick = ButtonFlatFormatClick
+            RoundRectParam = 5
+            Shape = stRoundRect
+            ShowFocusRect = False
+            TabOrder = 8
+            TabStop = True
+            TextFormat = [tfCenter, tfSingleLine, tfVerticalCenter]
+            SubTextFont.Charset = DEFAULT_CHARSET
+            SubTextFont.Color = clWhite
+            SubTextFont.Height = -13
+            SubTextFont.Name = 'Tahoma'
+            SubTextFont.Style = []
+            ExplicitLeft = 345
+            ExplicitTop = 0
+          end
         end
         object Panel16: TPanel
-          Left = 0
+          Left = 45
           Top = 28
-          Width = 426
+          Width = 381
           Height = 28
           Align = alTop
           BevelOuter = bvNone
@@ -9741,8 +9888,8 @@ object FormMain: TFormMain
           ParentBackground = False
           TabOrder = 1
           StyleElements = []
-          ExplicitLeft = -6
-          ExplicitTop = 31
+          ExplicitLeft = 50
+          ExplicitWidth = 376
           object ButtonFlatNoteParLeft: TButtonFlat
             Tag = 1
             AlignWithMargins = True
@@ -9750,6 +9897,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1059#1084#1077#1085#1100#1096#1080#1090#1100' '#1086#1090#1089#1090#1091#1087
             Margins.Right = 0
             Align = alLeft
             Caption = ''
@@ -9798,6 +9946,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1059#1074#1077#1083#1080#1095#1080#1090#1100' '#1086#1090#1089#1090#1091#1087
             Margins.Left = 0
             Align = alLeft
             Caption = ''
@@ -9845,6 +9994,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1055#1086#1083#1091#1078#1080#1088#1085#1099#1081
             Margins.Right = 0
             Align = alLeft
             Caption = ''
@@ -9893,6 +10043,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1050#1091#1088#1089#1080#1074#1085#1099#1081
             Margins.Left = 0
             Margins.Right = 0
             Align = alLeft
@@ -9942,6 +10093,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1055#1086#1076#1095#1077#1088#1082#1085#1091#1090#1099#1081
             Margins.Left = 0
             Margins.Right = 0
             Align = alLeft
@@ -9991,6 +10143,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1047#1072#1095#1077#1088#1082#1085#1091#1090#1099#1081
             Margins.Left = 0
             Margins.Right = 0
             Align = alLeft
@@ -10040,6 +10193,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1055#1086#1076#1089#1090#1088#1086#1095#1085#1099#1081
             Margins.Left = 0
             Margins.Right = 0
             Align = alLeft
@@ -10089,6 +10243,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1053#1072#1076#1089#1090#1088#1086#1095#1085#1099#1081
             Margins.Left = 0
             Align = alLeft
             Caption = ''
@@ -10137,6 +10292,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1042#1099#1088#1086#1074#1085#1103#1090#1100' '#1087#1086' '#1083#1077#1074#1086#1084#1091' '#1082#1088#1072#1102
             Margins.Right = 0
             Align = alLeft
             Caption = ''
@@ -10185,6 +10341,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1055#1086' '#1094#1077#1085#1090#1088#1091
             Margins.Left = 0
             Margins.Right = 0
             Align = alLeft
@@ -10234,6 +10391,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1042#1099#1088#1086#1074#1085#1103#1090#1100' '#1087#1086' '#1087#1088#1072#1074#1086#1084#1091' '#1082#1088#1072#1102
             Margins.Left = 0
             Margins.Right = 0
             Align = alLeft
@@ -10283,6 +10441,7 @@ object FormMain: TFormMain
             Top = 3
             Width = 25
             Height = 22
+            Hint = #1042#1099#1088#1072#1074#1085#1103#1090#1100' '#1087#1086' '#1096#1080#1088#1080#1085#1077
             Margins.Left = 0
             Align = alLeft
             Caption = ''
@@ -10327,8 +10486,8 @@ object FormMain: TFormMain
         end
       end
       object TableExFonts: TTableEx
-        Left = 6
-        Top = 95
+        Left = 0
+        Top = 62
         Width = 165
         Height = 293
         BorderStyle = bsNone
@@ -10385,94 +10544,141 @@ object FormMain: TFormMain
       end
     end
   end
-  object PanelList: TPanel
-    AlignWithMargins = True
-    Left = 24
-    Top = 24
-    Width = 435
-    Height = 528
-    Margins.Left = 0
-    Margins.Top = 0
-    Margins.Right = 20
-    Margins.Bottom = 0
-    Align = alLeft
-    BevelOuter = bvNone
-    TabOrder = 1
-    object TableExItems: TTableEx
-      Left = 9
-      Top = 0
-      Width = 426
-      Height = 528
-      Align = alClient
-      BorderStyle = bsNone
-      DefaultRowHeight = 30
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      OnDrawCellData = TableExItemsDrawCellData
-      ItemIndex = -1
-      OnChangeItem = TableExItemsChangeItem
-      OnItemClick = TableExItemsItemClick
-      GetData = TableExItemsGetData
-      OnEdit = TableExItemsEdit
-      OnEditOk = TableExItemsEditOk
-      ProcEmpty = True
-      Columns = <
-        item
-          Width = 426
-        end>
-      CanNoSelect = False
-      VisibleEdit = False
-      ItemCount = 1
-      FontHotLine.Charset = DEFAULT_CHARSET
-      FontHotLine.Color = 2631720
-      FontHotLine.Height = -16
-      FontHotLine.Name = 'Tahoma'
-      FontHotLine.Style = []
-      FontLine.Charset = DEFAULT_CHARSET
-      FontLine.Color = 2631720
-      FontLine.Height = -16
-      FontLine.Name = 'Tahoma'
-      FontLine.Style = []
-      FontSelLine.Charset = DEFAULT_CHARSET
-      FontSelLine.Color = clWhite
-      FontSelLine.Height = -16
-      FontSelLine.Name = 'Tahoma'
-      FontSelLine.Style = []
-      ShowColumns = False
-      ColumnsFont.Charset = DEFAULT_CHARSET
-      ColumnsFont.Color = 2631720
-      ColumnsFont.Height = -11
-      ColumnsFont.Name = 'Tahoma'
-      ColumnsFont.Style = []
-    end
-    object DrawPanelFakeLists1: TDrawPanel
-      Left = 0
-      Top = 0
-      Width = 9
-      Height = 528
-      Caption = 'DrawPanelFakeLists1'
-      DefaultPaint = False
-      OnPaint = DrawPanelFakeLists1Paint
-      Align = alLeft
-      ParentBackground = False
-      TabOrder = 1
-      ExplicitLeft = 24
-      ExplicitTop = 176
-      ExplicitHeight = 130
-    end
-  end
   object ImageListNotes: TImageList
     ColorDepth = cd32Bit
-    Left = 256
-    Top = 152
+    Left = 160
+    Top = 208
     Bitmap = {
-      494C01012B0088007C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
-      000000000000360000002800000040000000B0000000010020000000000000B0
+      494C01012C0088008C0010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      000000000000360000002800000040000000C0000000010020000000000000C0
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -10496,47 +10702,47 @@ object FormMain: TFormMain
       E2FFE2E2E2FFEEEEEEFE74747498000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
+      0003080808160000000000000000000000000000000000000000000000000101
+      0107070707130000000000000000000000000000000051515172F0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3A3A
       3A64060606140606061406060614060606140606061406060614060606140606
       06140D0D0D29E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
+      0000000000000000000000000000000000000000000000000000000000007B7B
+      7BA8BABABADE0E0E0E1F00000000000000000000000000000000010101078B8B
+      8BB6AEAEAED40707071300000000000000000000000051515172F0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FFA3A3A3CFE4E4E4FCF0F0F0FFF0F0F0FFF0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3636
       3654000000000000000000000000000000000000000000000000000000000000
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       00000000000000070A0E124E729A1F7EB9F81E81BDFE145780AC020D121A0000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
+      0000000000000000000000000000000000000000000000000000000000005555
+      557DEBEBEBFFBABABADE0E0E0E1F0000000000000000010101078B8B8BB6F0F0
+      F0FF8B8B8BB60101010700000000000000000000000051515172F0F0F0FFF0F0
       F0FFF0F0F0FF8E8E8EB8010101073E3E3E5EE4E4E4FCF0F0F0FFF0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3636
       3654000000000000000000000000000000000000000000000000000000000000
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       00000000000017618EBF1F82BEFF1F82BEFF1F82BEFF1F82BEFF1B6FA3DA0105
       080A000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
+      00005555557DEBEBEBFFBABABADE0E0E0E1F010101078B8B8BB6F0F0F0FF8B8B
+      8BB6010101070000000000000000000000000000000051515172F0F0F0FFF0F0
       F0FF8F8F8FBA0303030E6D6D6D991919192C3E3E3E5EE4E4E4FCF0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3636
       3654000000000000000000000000000000000000000000000000000000000000
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       0000071C2A381F82BEFF1F82BEFF1F82BEFF1F82BEFF1F82BEFF1F82BEFF0B30
       465E000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FF9696
+      0000000000005555557DEBEBEBFFBABABADE8F8F8FBDF0F0F0FF8B8B8BB60101
+      0107000000000000000000000000000000000000000051515172F0F0F0FF9696
       96C20404040E838383AFEFEFEFFFC8C8C8E91919192C3E3E3E5EE4E4E4FCF0F0
       F0FFF0F0F0FFF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3636
       3654000000000000000000000000000000000000000000000000000000000000
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       00000A2A3D531F82BEFF1F82BEFF1F82BEFF1F82BEFF1F82BEFF1F82BEFF0F3D
       5978000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000059595985EDEDEDFFF0F0F0FF8F8F8FBD010101070000
       0000000000000000000000000000000000000000000051515172F0F0F0FFBFBF
       BFE28B8B8BB9EFEFEFFFF0F0F0FFF0F0F0FFC8C8C8E91919192C3E3E3E5EE4E4
       E4FCF0F0F0FFF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3636
@@ -10544,7 +10750,7 @@ object FormMain: TFormMain
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       000004131B251E81BBFD1F82BEFF1F82BEFF1F82BEFF1F82BEFF1F82BEFF0925
       3648000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000010101078B8B8BB6F0F0F0FFEDEDEDFFBABABADE0E0E0E1F0000
       0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFC8C8C8E91919192C3E3E
       3E5EE4E4E4FCF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3636
@@ -10552,32 +10758,32 @@ object FormMain: TFormMain
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       00000000000012496A901F82BEFF1F82BEFF1F82BEFF1F82BEFF165D88B60000
       0101000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
+      0000010101078B8B8BB6F0F0F0FF8B8B8BB659595985EBEBEBFFBABABADE0E0E
+      0E1F000000000000000000000000000000000000000051515172F0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFC8C8C8E91919
       192C48484873EEEEEEFE8D8D8DB2000000000000000051515172F0F0F0FF3636
       3654000000000000000000000000000000000000000000000000000000000000
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       000000000000000000000A2E435A175E89B817618DBE0D37506C000202040000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
+      0000000000000000000000000000000000000000000000000000000000000101
+      01078B8B8BB6F0F0F0FF8B8B8BB601010107000000005555557DEBEBEBFFBABA
+      BADE0E0E0E1F0000000000000000000000000000000051515172F0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFC8C8
       C8E9B0B0B0D6F0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF3636
       3654000000000000000000000000000000000000000000000000000000000000
       000006060614E2E2E2FF8D8D8DB2000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000051515172F0F0F0FFF0F0
+      0000000000000000000000000000000000000000000000000000000000008787
+      87B5F0F0F0FF8B8B8BB6010101070000000000000000000000005555557DEBEB
+      EBFFBABABADE0808081600000000000000000000000051515172F0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0
       F0FFF0F0F0FFF0F0F0FF8D8D8DB2000000000000000051515172F0F0F0FF5E5E
       5E8F363636543636365436363654363636543636365436363654363636543636
       36543A3A3A64E4E4E4FE8D8D8DB2000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000025252540E7E7E7FEF0F0
+      0000000000000000000000000000000000000000000000000000000000004848
+      486C878787B50101010700000000000000000000000000000000000000005555
+      557D7B7B7BA80000000300000000000000000000000025252540E7E7E7FEF0F0
       F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0
       F0FFF0F0F0FFEFEFEFFE5959597F00000000000000002525253EE6E6E6FDF0F0
       F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0F0FFF0F0
@@ -11882,12 +12088,16 @@ object FormMain: TFormMain
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
-      2800000040000000B00000000100010000000000800500000000000000000000
-      000000000000000000000000FFFFFF00FFFFFFFFFFFF000080018001FFFF0000
-      80018001FFFF000080018001FFFF000080018FF1F81F000080018FF1F80F0000
-      80018FF1F00F000080018FF1F00F000080018FF1F00F000080018FF1F80F0000
-      80018FF1FC1F000080018FF1FFFF000080018001FFFF000080018001FFFF0000
-      C001C001FFFF0000FFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      2800000040000000C00000000100010000000000000600000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000FFFFFFFFFFFFFFFF80018001FFFFFFFF
+      80018001FFFFE7E780018001FFFFE3C380018FF1F81FE18380018FF1F80FF007
+      80018FF1F00FF80F80018FF1F00FFC1F80018FF1F00FF81F80018FF1F80FF00F
+      80018FF1FC1FE08780018FF1FFFFE1C380018001FFFFE3E380018001FFFFFFFF
+      C001C001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       800180018001800180018001800180018001800180018001800FF00FF0018001
       8007E007E00180018007E007E0018001FFFFFFFFFFFFFFFF8001800180018001
       8001800180018001FFFFFFFFFFFFFFFF800FF00FF0018001800FF00FF0018001
@@ -11953,8 +12163,8 @@ object FormMain: TFormMain
       '94DD85'
       '94DD85')
     Options = [cdFullOpen]
-    Left = 348
-    Top = 152
+    Left = 160
+    Top = 261
   end
   object ImageListButtons: TImageList
     ColorDepth = cd32Bit
@@ -11963,7 +12173,7 @@ object FormMain: TFormMain
     Left = 160
     Top = 152
     Bitmap = {
-      494C010108001000300018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      494C010108001000380018001800FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000060000000480000000100200000000000006C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -12863,10 +13073,10 @@ object FormMain: TFormMain
   end
   object ImageListCheck: TImageList
     ColorDepth = cd32Bit
-    Left = 432
-    Top = 152
+    Left = 160
+    Top = 320
     Bitmap = {
-      494C0101020008000C0010001000FFFFFFFF2100FFFFFFFFFFFFFFFF424D3600
+      494C010102000800140010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -13002,6 +13212,7 @@ object FormMain: TFormMain
       C003C00300000000C003C00300000000C003CFF300000000C003CFF300000000
       C003CFF300000000C003CFF300000000C003CFF300000000C003CFF300000000
       C003CFF300000000C003CFF300000000C003C00300000000E003E00300000000
-      FFFFFFFF00000000FFFFFFFF00000000}
+      FFFFFFFF00000000FFFFFFFF0000000000000000000000000000000000000000
+      000000000000}
   end
 end

@@ -17,6 +17,8 @@ type
 
   TFontItems = TTableData<TFontItem>;
 
+  TFormMode = (fmLogin, fmChangePass, fmNormal);
+
   TFormMain = class(TForm)
     PanelView: TPanel;
     ImageListNotes: TImageList;
@@ -91,6 +93,7 @@ type
     DrawPanelFakeLists2: TDrawPanel;
     PanelEditor: TPanel;
     ImageListCheck: TImageList;
+    ButtonFlatCloseFormat: TButtonFlat;
     procedure TableExFontsDrawCellData(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure TableExFontsItemClick(Sender: TObject; MouseButton: TMouseButton; const Index: Integer);
     procedure MemoNoteSelectionChange(Sender: TObject);
@@ -145,6 +148,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure ButtonFlatLoginClick(Sender: TObject);
     procedure DrawPanelFakeLists1Paint(Sender: TObject);
+    procedure ButtonFlatLockQuitClick(Sender: TObject);
   protected
     procedure WMSize(var Message: TWMSize); message WM_SIZE;
   private
@@ -170,7 +174,7 @@ type
     procedure SetColors;
     procedure Clear;
     procedure UpdateEnable;
-    procedure Login;
+    procedure SetMode(Mode: TFormMode);
   public
     { Public declarations }
   end;
@@ -242,6 +246,14 @@ begin
     MemoNote.PlainText := False;
     FItems[Index].Text.Position := 0;
     MemoNote.Lines.LoadFromStream(FItems[Index].Text);
+    if MemoNote.Lines.Text = '' then
+    begin
+      MemoNote.DefAttributes.Name := 'Segoe Script';
+      MemoNote.DefAttributes.Size := 12;
+      MemoNote.DefAttributes.Color := $00666666;
+      MemoNote.Paragraph.Alignment := taCenter;
+      MemoNoteSelectionChange(nil);
+    end;
     FEmpty := False;
     CheckBoxCompleted.Checked := FItems[Index].Completed;
     FLoadID := FItems[Index].ID;
@@ -250,24 +262,6 @@ begin
   else
     Clear;
   UpdateEnable;
-end;
-
-procedure TFormMain.Login;
-begin
-  if FDBParams.GetParam('Pass') = EditPass.Text then
-  begin
-    EditPass.Text := '';
-    PanelCtrl.Show;
-    while PanelLock.Top > -PanelLock.Height do
-    begin
-      PanelLock.Top := PanelLock.Top - 10;
-      Sleep(2);
-      Repaint;
-    end;
-
-    PanelLock.Hide;
-    Repaint;
-  end;
 end;
 
 procedure TFormMain.Save(Index: Integer);
@@ -298,22 +292,39 @@ begin
   Save(TableExItems.ItemIndex);
 end;
 
+procedure TFormMain.ButtonFlatLockQuitClick(Sender: TObject);
+begin
+  Close;
+end;
+
 procedure TFormMain.ButtonFlatLoginClick(Sender: TObject);
 begin
-  Login;
+  if FDBParams.GetParam('Pass') = EditPass.Text then
+  begin
+    EditPass.Text := '';
+    PanelCtrl.Show;
+    PanelView.Show;
+    PanelList.Show;
+    PanelLock.BringToFront;
+    while PanelLock.Top > -PanelLock.Height do
+    begin
+      PanelLock.Top := PanelLock.Top - 10;
+      Sleep(2);
+      Repaint;
+    end;
+    PanelLock.Hide;
+    Repaint;
+  end;
 end;
 
 procedure TFormMain.ButtonFlatCancelChangeClick(Sender: TObject);
 begin
-  PanelChangePass.Hide;
-  Repaint;
+  SetMode(fmNormal);
 end;
 
 procedure TFormMain.ButtonFlatChangePassClick(Sender: TObject);
 begin
-  PanelChangePass.Show;
-  PanelChangePass.BringToFront;
-  Repaint;
+  SetMode(fmChangePass);
 end;
 
 procedure TFormMain.ButtonFlatCopyClick(Sender: TObject);
@@ -589,8 +600,7 @@ begin
       EditChCurrentPass.Text := '';
       EditChNewPass.Text := '';
       EditChRepPass.Text := '';
-      PanelChangePass.Hide;
-      Repaint;
+      SetMode(fmNormal);
     end
     else
       MessageBox(Handle, 'Пароли не совпадают!', '', MB_ICONWARNING or MB_OK);
@@ -678,7 +688,7 @@ begin
   if Key = #13 then
   begin
     Key := #0;
-    Login;
+    ButtonFlatLoginClick(nil);
   end;
 end;
 
@@ -757,6 +767,32 @@ begin
   PanelCtrl.Color := BGColor;
 end;
 
+procedure TFormMain.SetMode(Mode: TFormMode);
+begin
+  PanelView.Visible := Mode = fmNormal;
+  PanelList.Visible := Mode = fmNormal;
+  PanelCtrl.Visible := Mode = fmNormal;
+  PanelLock.Visible := Mode = fmLogin;
+  PanelChangePass.Visible := Mode = fmChangePass;
+  Repaint;
+  {
+  case Mode of
+    fmLogin:
+    begin
+
+    end;
+    fmChangePass:
+    begin
+
+    end;
+    fmNormal:
+    begin
+
+    end;
+  end;
+  }
+end;
+
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
   FLoadID := -1;
@@ -790,9 +826,7 @@ begin
 
   Clear;
 
-  PanelChangePass.Hide;
-  PanelLock.Show;
-  PanelLock.BringToFront;
+  SetMode(fmLogin);
 end;
 
 procedure TFormMain.FormDestroy(Sender: TObject);
@@ -905,11 +939,12 @@ end;
 procedure TFormMain.FormShow(Sender: TObject);
 begin
   EditPass.SetFocus;
+  Invalidate;
 end;
 
 procedure TFormMain.MemoNoteSelectionChange(Sender: TObject);
 begin
-  if MemoNote.Showing then
+  if PanelView.Enabled and PanelView.Visible then
     MemoNote.SetFocus;
 
   ButtonFlatFonts.Font.Name := MemoNote.SelAttributes.Name;
