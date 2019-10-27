@@ -1050,7 +1050,7 @@ begin
   begin
     Value := FItems[FRow].Desc;
     if Value = '' then
-      Value := 'Безыменный';
+      Value := 'Безымянный';
 
   end
   else
